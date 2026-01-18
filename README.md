@@ -1,8 +1,28 @@
 
 <h1 align="center">Kubernetes (K8s) Info and Setup</h1>
 
+<br>
+<br>
+
+---
+
+- [Introduction to Kubernetes(K8s)](#example-0)
+- [Kubernetes Architecture Overview](#example-1)
+   - [Kubernetes Architecture Details](#example-2)
+- [k8s Related some concepts](#example-3)
+- [Kubernetes vs Docker](#example-4)
+- [How Kubernetes Came to the Market](#example-5)
+
+- [Setup](#example-6)
 
 
+
+<br>
+<br>
+
+---
+
+<a id="example-0"></a>
 
 # 🚢 Introduction to Kubernetes (K8s)
 
@@ -15,6 +35,14 @@ Kubernetes (often written as K8s) is an open-source container orchestration plat
 In simple words:<br>
 👉 Docker runs containers<br>
 👉 Kubernetes manages those containers in production
+
+
+<p align="center">
+  <img src="" width="500" alt="Initialize Repository Screenshot">
+</p>
+
+
+
 
 ---
 
@@ -69,7 +97,14 @@ With Kubernetes:
 
 ---
 
+<a id="example-1"></a>
+
 ##  🏗️ Kubernetes Architecture Overview 
+
+<p align="center">
+  <img src="" width="500" alt="Initialize Repository Screenshot">
+</p>
+
 
 ###  1️⃣ Kubernetes Cluster
 
@@ -163,6 +198,8 @@ Components inside Worker Node:
 
 
 ---
+
+<a id="example-2"></a>
 
 ### Kubernetes Architecture
 
@@ -299,6 +336,8 @@ Together, they form a Kubernetes Cluster.
 
 ### 1. kube-apiserver
 
+<br>
+
 - Entry point of Kubernetes
 - All requests go through API Server
 - Communicates with kubectl, UI, and components
@@ -314,6 +353,9 @@ kubectl get pods
 ---
 
 ### 2. etcd
+
+
+<br>
 
  - The master node requires a database to store all cluster-related information.
 
@@ -374,6 +416,8 @@ key points :
 
 ### 3. kube-scheduler
 
+<br>
+
 
 >The scheduler’s job is to schedule Pods, see where they should run, and act like a manager deciding what runs where.
 
@@ -401,6 +445,8 @@ key points :
 
 
 ### 4. kube-controller-manager
+
+<br>
 
    
 - The Control Manager’s job is to monitor cluster health and manage resources.
@@ -435,6 +481,9 @@ Examples:
 
 
 ### 5. cloud-controller-manager (Optional)
+
+
+<br>
 
 - Integrates with cloud providers
 - Manages:
@@ -508,6 +557,8 @@ Examples:
 
 ---
 
+<a id="example-3"></a>
+
 ## Here are some more points
 
 
@@ -549,6 +600,9 @@ Examples:
 
 ---
 
+
+<a id="example-4"></a>
+
 ### Kubernetes vs Docker
 
 | Docker                          | Kubernetes                         |
@@ -566,6 +620,8 @@ Examples:
 ---
 ---
 ---
+
+<a id="example-5"></a>
 
 
 ## 🌍 How Kubernetes Came to the Market
@@ -658,7 +714,11 @@ So Microsoft:
 - Industry standard for DevOps & Cloud
 
 ---
+---
+---
 
+
+<a id="example-6"></a>
 
 
 
