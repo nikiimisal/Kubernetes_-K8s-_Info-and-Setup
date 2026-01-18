@@ -242,31 +242,95 @@ Examples:
   - Nodes (AWS / Azure / GCP)
 
 
+---
+
+### 2️⃣ Worker Node
+
+
+👉 Where applications actually run
+
+🔹 Components of Worker Node
+
+1. kubelet
+
+- Agent running on each node
+- Talks to API Server
+- Ensures Pods are running
+
+📌 kubelet = Pod manager of the node
 
 
 
+2. Container Runtime
+
+- Runs containers
+- Examples:
+  - Docker
+  - containerd
+  - CRI-O
+
+3. kube-proxy
+
+- Manages networking
+- Enables service-to-pod communication
+- Handles load balancing
 
 
 
+4. Pods
+
+- Smallest deployable unit
+- Contains one or more containers
+- Shares:
+  - Network
+  - Storage
+
+---
+
+### 🔁 How Kubernetes Architecture Works (Flow)
+
+1. User runs kubectl apply
+2. Request goes to API Server
+3. Data stored in etcd
+4. Scheduler selects node
+5. kubelet runs Pod
+6. kube-proxy enables networking
+7. Controller ensures desired state
 
 
+---
+
+### Here are some more points
 
 
+■ Kubernetes Service
+- Used because Pods have dynamic IPs
+- Provides a stable IP/DNS
+- Used to expose and access Pods
+- Works by routing traffic to matching Pods using labels
+
+■ Load Balancer
+- Used to distribute traffic evenly
+- Prevents overload on a single Pod
+- Works by sending requests to multiple Pods via a Service
+
+■ Horizontal Pod Autoscaler (HPA)
+- Used to handle increasing load
+- Automatically increases/decreases Pod count
+- Works by monitoring CPU/Memory metrics
+
+■ Cluster Autoscaler
+- Used when Pods cannot be scheduled due to lack of Nodes
+- Automatically adds or removes Nodes
+- Works with cloud Auto Scaling Groups (ASG)
+
+■ Auto Scaling Group (ASG)
+- Used to manage Node instances
+- Automatically adds/removes EC2 instances
+- Ensures high availability of Nodes
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+---
 
 
 
