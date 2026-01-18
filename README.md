@@ -74,19 +74,23 @@ With Kubernetes:
 
 ```pgsql
 
-User
- |
-kubectl
- |
-Master Node (Control Plane)
- ├── API Server
- ├── Scheduler
- ├── Controller Manager
- |
-Worker Nodes
- ├── Pod
- ├── Pod
- ├── Pod
+                User
+                 |
+              kubectl
+                 |
+         ------------------
+         |  API Server   |
+         ------------------
+           |      |     |
+        etcd  Scheduler Controller
+                 |
+        ---------------------
+        |     Worker Node   |
+        |  kubelet          |
+        |  kube-proxy       |
+        |  Containers       |
+        ---------------------
+
 
 ```
 
@@ -202,18 +206,40 @@ Example:
 
 
 
+4. kube-controller-manager
+
+   
+- The Control Manager’s job is to monitor cluster health and manage resources.
+- Before a Pod is created on any Node, the Scheduler asks the Control Manager if the Node is ready.
+  
+- The Control Manager continuously checks the health of all Nodes:
+  - When a Node joins the cluster, it verifies its health.
+  - It keeps monitoring the Node over time.
+
+- Only if the Node is healthy, the Scheduler assigns the Pod to that Node.
+- In short:<br>
+   Scheduler decides “where to run,” but only after the Control Manager confirms the Node is healthy.
+
+>The Control Manager checks the health of Nodes. Only if a Node is healthy, the Scheduler assigns Pods to it.
 
 
+- Runs controllers
+- Ensures desired state = actual state
+Examples:
+  - Node Controller
+  - ReplicaSet Controller
+  - Deployment Controller
+
+📌 If Pod dies → controller creates new Pod.
 
 
+5. cloud-controller-manager (Optional)
 
-
-
-
-
-
-
-
+- Integrates with cloud providers
+- Manages:
+  - Load balancers
+  - Volumes
+  - Nodes (AWS / Azure / GCP)
 
 
 
