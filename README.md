@@ -70,6 +70,101 @@ With Kubernetes:
 
 ---
 
+##  🏗️ Kubernetes Architecture Overview 
+
+###  1️⃣ Kubernetes Cluster
+
+
+👉 Whole setup is called a Cluster
+
+A Kubernetes Cluster is a group of machines (nodes) that work together to run containerized applications.
+
+Cluster = Master Node + Worker Nodes
+
+---
+
+###  2️⃣ Master Node (Control Plane)
+
+  👉 Brain of the cluster
+
+- Created using: `kubeadm init`
+- Controls the entire cluster
+- Makes decisions (scheduling, scaling, healing)
+
+Main components inside Master:
+
+- API Server
+- Scheduler
+- Controller Manager
+- etcd (cluster data)
+
+📌 Master does not run application pods (best practice)
+
+---
+
+###  3️⃣ Worker Node (Slave Node)
+
+
+👉 Where application actually runs
+
+- Joined using: `kubeadm join`
+- Can be 1 or many worker nodes
+- Each worker node runs pods
+
+Components inside Worker Node:
+
+- kubelet
+- kube-proxy
+- Container runtime (Docker / containerd)
+
+---
+
+### 4️⃣ Node
+
+
+👉 A Node is a single machine (EC2 / VM / Server)
+
+- Master is also a node
+- Worker is also a node
+- Node can be:
+   - Master Node
+   - Worker (Slave) Node
+
+📌 Node = EC2 / VM
+
+---
+
+### 5️⃣ Pod
+
+👉 Smallest deployable unit in Kubernetes
+
+- Pod runs one or more containers
+- Pods are created on Worker Nodes
+- Kubernetes never deploys containers directly → it deploys Pods
+
+📌 Pod = Wrapper around container
+
+
+---
+
+### 🔁 Architecture Flow 
+
+1. Create cluster using `kubeadm init` → Master ready
+2. Worker nodes join using `kubeadm join`
+3. User applies deployment (`kubectl apply`)
+4. Master schedules Pods
+5. Pods run on Worker Nodes
+6. Containers run inside Pods
+
+
+
+
+
+
+
+
+---
+
 ### Kubernetes Architecture
 
 ```pgsql
@@ -92,7 +187,83 @@ With Kubernetes:
         ---------------------
 
 
+
+
+
 ```
+
+
+```pgsql
+
+                               👤 USER
+                                 |
+                              Browser
+                                 |
+                        ┌──────────────────┐
+                        │  CLOUD LOAD      │
+                        │  BALANCER (ELB)  │
+                        └─────────┬────────┘
+                                  |
+                          Kubernetes Service
+                         (NodePort / LoadBalancer)
+                                  |
+        ==================================================================
+        |                    KUBERNETES CLUSTER                           |
+        |                                                                 |
+        |   ┌─────────────────────────────────────────────────────────┐ |
+        |   │             MASTER NODE (Control Plane)                  │ |
+        |   │                     (EC2 / VM)                           │ |
+        |   │                                                         │ |
+        |   │   kubeadm init                                          │ |
+        |   │                                                         │ |
+        |   │   ┌──────────────┐                                     │ |
+        |   │   │  API SERVER  │ ◄──── kubectl / Service Requests     │ |
+        |   │   └──────┬───────┘                                     │ |
+        |   │          │                                             │ |
+        |   │   ┌──────▼──────┐                                      │ |
+        |   │   │    etcd     │  (Cluster State DB)                  │ |
+        |   │   └─────────────┘                                      │ |
+        |   │                                                         │ |
+        |   │   ┌──────────────┐   ┌────────────────────────────┐   │ |
+        |   │   │  Scheduler   │   │ kube-controller-manager     │   │ |
+        |   │   │ (Pod → Node) │   │ (Desired = Actual State)    │   │ |
+        |   │   └──────┬───────┘   └───────────┬────────────────┘   │ |
+        |   └──────────┼───────────────────────┼────────────────────┘ |
+        |              |                       |                      |
+        |==============|=======================|======================|
+                       |                       |
+                 Pod Scheduling           Health / Scaling
+                       |                       |
+        ------------------------------------------------------------------
+        |        AUTO SCALING GROUP – WORKER NODES (Slave Nodes)          |
+        ------------------------------------------------------------------
+        |                                                                |
+        |   ┌──────────────────┐     ┌──────────────────┐              |
+        |   │  WORKER NODE 1   │     │  WORKER NODE 2   │   (+ More)    |
+        |   │     (EC2)        │     │     (EC2)        │              |
+        |   │ kubeadm join     │     │ kubeadm join     │              |
+        |   │                  │     │                  │              |
+        |   │ ┌────────────┐  │     │ ┌────────────┐  │              |
+        |   │ │  kubelet   │◄─┼─────►│ │  kubelet   │  │              |
+        |   │ └────────────┘  │     │ └────────────┘  │              |
+        |   │ ┌────────────┐  │     │ ┌────────────┐  │              |
+        |   │ │ kube-proxy │──┼─────►│ │ kube-proxy │  │              |
+        |   │ └────────────┘  │     │ └────────────┘  │              |
+        |   │                  │     │                  │              |
+        |   │ ┌──────────────────────── POD ───────────────────────┐  |
+        |   │ │  Container (App)                                   │  |
+        |   │ └────────────────────────────────────────────────────┘  |
+        |   │ ┌──────────────────────── POD ───────────────────────┐  |
+        |   │ │  Container (App)                                   │  |
+        |   │ └────────────────────────────────────────────────────┘  |
+        |   └──────────────────┘     └──────────────────┘              |
+        |                                                                |
+        ------------------------------------------------------------------
+
+
+
+```
+
 
 
 
@@ -125,6 +296,8 @@ Together, they form a Kubernetes Cluster.
 kubectl get pods
 → API Server
 ```
+
+---
 
 2. etcd
 
@@ -204,6 +377,7 @@ Example:
 📌 Scheduler does NOT run pods, only assigns nodes.
 
 
+---
 
 
 4. kube-controller-manager
@@ -233,6 +407,9 @@ Examples:
 📌 If Pod dies → controller creates new Pod.
 
 
+---
+
+
 5. cloud-controller-manager (Optional)
 
 - Integrates with cloud providers
@@ -243,6 +420,8 @@ Examples:
 
 
 ---
+---
+
 
 ### 2️⃣ Worker Node
 
@@ -250,6 +429,8 @@ Examples:
 👉 Where applications actually run
 
 🔹 Components of Worker Node
+
+---
 
 1. kubelet
 
@@ -260,6 +441,7 @@ Examples:
 📌 kubelet = Pod manager of the node
 
 
+---
 
 2. Container Runtime
 
@@ -268,6 +450,8 @@ Examples:
   - Docker
   - containerd
   - CRI-O
+ 
+ ---
 
 3. kube-proxy
 
@@ -275,7 +459,7 @@ Examples:
 - Enables service-to-pod communication
 - Handles load balancing
 
-
+---
 
 4. Pods
 
@@ -325,6 +509,9 @@ Examples:
 - Works with cloud Auto Scaling Groups (ASG)
 
 ■ Auto Scaling Group (ASG)
+
+- Auto Scaling handles the management of Nodes.
+- And Kubernetes handles the Pods running inside the Nodes.
 - Used to manage Node instances
 - Automatically adds/removes EC2 instances
 - Ensures high availability of Nodes
@@ -336,43 +523,118 @@ Examples:
 
 
 
+---
+
+### Kubernetes vs Docker
+
+| Docker                          | Kubernetes                         |
+| ------------------------------- | ---------------------------------- |
+| Creates and runs containers     | Manages and orchestrates containers |
+| Works mainly on a single host   | Works across a multi-node cluster  |
+| Manual container scaling        | Automatic scaling of applications  |
+| No built-in self-healing        | Self-healing (auto restart, replace) |
+| Limited networking features    | Advanced networking and services  |
+| No load balancing by default   | Built-in load balancing            |
+| Best for development & testing | Best for production environments  |
+| Focuses on containers          | Focuses on container management   |
+
+
+---
+---
+---
+
+
+## 🌍 How Kubernetes Came to the Market
+
+Kubernetes came from Google’s internal system called Borg.
+Google was running millions of containers for years and needed a powerful system to manage them automatically.
+
+### 📜 The Story
+
+📜 The Story of Kubernetes (Simple)
+
+- Google started building an internal system called **Borg** around 2003–2004
+  to manage containers and applications at a very large scale.
+
+- Borg was created by Google engineers to run millions of containers reliably
+  across thousands of machines.
+
+- Based on the experience from Borg, Google decided to build a new,
+  more general platform for everyone.
+
+- In **2014**, Google open-sourced this project and named it **Kubernetes**.
+
+- The name Kubernetes comes from a Greek word meaning **“helmsman”**,
+  the person who steers a ship 🚢.
+
+- In **2015**, Kubernetes was donated to the **Cloud Native Computing Foundation (CNCF)**,
+  which helped it grow as a community-driven project.
+
+- The main goal of Kubernetes is to **automatically manage containers in production**:
+  scaling, healing, networking, and deployments.
 
 
 
+📅 Kubernetes Timeline
 
+- 2003–2004 → Google starts building **Borg** for internal container management.
+- 2014 → Google open-sources the project as **Kubernetes**.
+- 2015 → Kubernetes is donated to **CNCF** (Cloud Native Computing Foundation).
+- 2016 → Kubernetes gains wide adoption in the industry.
+- Present → Kubernetes is the most popular container orchestration platform.
 
+---
 
+###  🚀 Why Kubernetes Became Popular
+
+- Companies were using Docker, but:
+   - Docker alone was not enough for large-scale apps
+   - No auto-scaling, no self-healing, no cluster management
+
+- Kubernetes solved these problems:
+  - Auto-healing
+  - Auto-scaling
+  - Load balancing
+  - Zero-downtime deployments
 
 
 ---
 
-###  Kubernetes vs Docker
+### 🏢 Big Companies Adopted Kubernetes
 
+- Google → GKE
+- Microsoft → AKS
+- Amazon → EKS
+- Red Hat → OpenShift
 
-| Docker             | Kubernetes         |
-| ------------------ | ------------------ |
-| Creates containers | Manages containers |
-| Single host        | Multi-node cluster |
-| Manual scaling     | Auto scaling       |
-| No self-healing    | Self-healing       |
+👉 When Microsoft adopted Kubernetes and launched Azure AKS, it became enterprise-ready and trusted globally.
 
 ---
 
+### 💡 Microsoft & Kubernetes
 
 
+Microsoft saw that:
 
+- Enterprises need cloud-native, scalable, portable apps
+- Kubernetes works across Azure, AWS, GCP, on-prem
+  
+So Microsoft:
 
+- Fully supported Kubernetes
+- Launched Azure Kubernetes Service (AKS)
+- Contributed code to Kubernetes (open-source)
 
+---
 
+### 📈 Why Kubernetes Won the Market
 
+- Cloud-agnostic (works everywhere)
+- Backed by Google + Microsoft + CNCF
+- Perfect for microservices
+- Industry standard for DevOps & Cloud
 
-
-
-
-
-
-
-
+---
 
 
 
