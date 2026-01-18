@@ -1,9 +1,6 @@
 
 <h1 align="center">Kubernetes (K8s) Info and Setup</h1>
 
-<br>
-<br>
-
 ---
 
 - [Introduction to Kubernetes(K8s)](#example-0)
@@ -18,7 +15,7 @@
 
 
 <br>
-<br>
+
 
 ---
 
