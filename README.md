@@ -38,7 +38,7 @@ In simple words:<br>
 
 
 <p align="center">
-  <img src="" width="500" alt="Initialize Repository Screenshot">
+  <img src="https://github.com/nikiimisal/Kubernetes_-K8s-_Info-and-Setup/blob/main/img/images.jpg?raw=true" width="500" alt="Initialize Repository Screenshot">
 </p>
 
 
@@ -82,6 +82,12 @@ With Kubernetes:
 - ✅ Load balancing
 - ✅ Easy deployments & rollbacks
 
+
+<p align="center">
+  <img src="https://github.com/nikiimisal/Kubernetes_-K8s-_Info-and-Setup/blob/main/img/Screenshot%202026-01-18%20104338.png?raw=true" width="500" alt="Initialize Repository Screenshot">
+</p>
+
+
 ---
 
 ### Key Components of Kubernetes
@@ -102,7 +108,7 @@ With Kubernetes:
 ##  🏗️ Kubernetes Architecture Overview 
 
 <p align="center">
-  <img src="" width="500" alt="Initialize Repository Screenshot">
+  <img src="https://github.com/nikiimisal/Kubernetes_-K8s-_Info-and-Setup/blob/main/img/img%204.png?raw=true" width="500" alt="Initialize Repository Screenshot">
 </p>
 
 
@@ -150,6 +156,15 @@ Components inside Worker Node:
 - kubelet
 - kube-proxy
 - Container runtime (Docker / containerd)
+
+---
+
+
+<p align="center">
+  <img src="https://github.com/nikiimisal/Kubernetes_-K8s-_Info-and-Setup/blob/main/img/Screenshot%202026-01-18%20104355.png?raw=true" width="500" alt="Initialize Repository Screenshot">
+</p>
+
+
 
 ---
 
@@ -202,6 +217,12 @@ Components inside Worker Node:
 <a id="example-2"></a>
 
 ### Kubernetes Architecture
+
+
+<p align="center">
+  <img src="https://github.com/nikiimisal/Kubernetes_-K8s-_Info-and-Setup/blob/main/img/kubernetes-architecture.jpg?raw=true" width="500" alt="Initialize Repository Screenshot">
+</p>
+
 
 ```pgsql
 
