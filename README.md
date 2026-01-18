@@ -1,6 +1,5 @@
-# Kubernetes (K8s) Info and Setup
 
-
+<h1 align="center">Kubernetes (K8s) Info and Setup</h1>
 
 
 
@@ -13,8 +12,8 @@ Kubernetes (often written as K8s) is an open-source container orchestration plat
 
 
 
-In simple words:
-👉 Docker runs containers
+In simple words:<br>
+👉 Docker runs containers<br>
 👉 Kubernetes manages those containers in production
 
 ---
@@ -275,11 +274,11 @@ Components inside Worker Node:
 
 ```
 
+---
 
 
-
-Kubernetes architecture is divided into two main parts:
-1️⃣ Control Plane (Master Node)
+Kubernetes architecture is divided into two main parts:<br>
+1️⃣ Control Plane (Master Node)<br>
 2️⃣ Worker Nodes
 
 Together, they form a Kubernetes Cluster.
@@ -287,14 +286,18 @@ Together, they form a Kubernetes Cluster.
 
 ---
 
-###  1️⃣ Control Plane (Master Node)
+##  1️⃣ Control Plane (Master Node)
 
-👉 Brain of Kubernetes
+👉 Brain of Kubernetes<br>
 👉 Makes decisions & manages the cluster
+
+---
 
 🔹 Components of Control Plane
 
-1. kube-apiserver
+---
+
+### 1. kube-apiserver
 
 - Entry point of Kubernetes
 - All requests go through API Server
@@ -310,7 +313,7 @@ kubectl get pods
 
 ---
 
-2. etcd
+### 2. etcd
 
  - The master node requires a database to store all cluster-related information.
 
@@ -346,6 +349,10 @@ Example:
 }
 ```
 
+<br>
+
+key points :
+
 - Key-value database
 - Stores cluster state
 - Stores:
@@ -365,7 +372,7 @@ Example:
 
 ---
 
- 3. kube-scheduler
+### 3. kube-scheduler
 
 
 >The scheduler’s job is to schedule Pods, see where they should run, and act like a manager deciding what runs where.
@@ -377,7 +384,9 @@ Example:
 - Then it assigns the Pod to the **most suitable Node**.  
 - After scheduling, the **Pod runs on that Node**.
 
+<br> 
 
+key points :
 
 - Decides where to run Pods
 - Selects best worker node based on:
@@ -391,7 +400,7 @@ Example:
 ---
 
 
-4. kube-controller-manager
+### 4. kube-controller-manager
 
    
 - The Control Manager’s job is to monitor cluster health and manage resources.
@@ -407,6 +416,10 @@ Example:
 
 >The Control Manager checks the health of Nodes. Only if a Node is healthy, the Scheduler assigns Pods to it.
 
+<br>
+
+key points :
+
 
 - Runs controllers
 - Ensures desired state = actual state
@@ -421,7 +434,7 @@ Examples:
 ---
 
 
-5. cloud-controller-manager (Optional)
+### 5. cloud-controller-manager (Optional)
 
 - Integrates with cloud providers
 - Manages:
@@ -434,7 +447,7 @@ Examples:
 ---
 
 
-### 2️⃣ Worker Node
+## 2️⃣ Worker Node
 
 
 👉 Where applications actually run
@@ -443,7 +456,7 @@ Examples:
 
 ---
 
-1. kubelet
+### 1. kubelet
 
 - Agent running on each node
 - Talks to API Server
@@ -454,7 +467,7 @@ Examples:
 
 ---
 
-2. Container Runtime
+### 2. Container Runtime
 
 - Runs containers
 - Examples:
@@ -464,7 +477,7 @@ Examples:
  
  ---
 
-3. kube-proxy
+### 3. kube-proxy
 
 - Manages networking
 - Enables service-to-pod communication
@@ -472,7 +485,7 @@ Examples:
 
 ---
 
-4. Pods
+### 4. Pods
 
 - Smallest deployable unit
 - Contains one or more containers
@@ -495,31 +508,31 @@ Examples:
 
 ---
 
-### Here are some more points
+## Here are some more points
 
 
-■ Kubernetes Service
+### ■ Kubernetes Service
 - Used because Pods have dynamic IPs
 - Provides a stable IP/DNS
 - Used to expose and access Pods
 - Works by routing traffic to matching Pods using labels
 
-■ Load Balancer
+### ■ Load Balancer
 - Used to distribute traffic evenly
 - Prevents overload on a single Pod
 - Works by sending requests to multiple Pods via a Service
 
-■ Horizontal Pod Autoscaler (HPA)
+### ■ Horizontal Pod Autoscaler (HPA)
 - Used to handle increasing load
 - Automatically increases/decreases Pod count
 - Works by monitoring CPU/Memory metrics
 
-■ Cluster Autoscaler
+### ■ Cluster Autoscaler
 - Used when Pods cannot be scheduled due to lack of Nodes
 - Automatically adds or removes Nodes
 - Works with cloud Auto Scaling Groups (ASG)
 
-■ Auto Scaling Group (ASG)
+### ■ Auto Scaling Group (ASG)
 
 - Auto Scaling handles the management of Nodes.
 - And Kubernetes handles the Pods running inside the Nodes.
@@ -562,7 +575,6 @@ Google was running millions of containers for years and needed a powerful system
 
 ### 📜 The Story
 
-📜 The Story of Kubernetes (Simple)
 
 - Google started building an internal system called **Borg** around 2003–2004
   to manage containers and applications at a very large scale.
@@ -586,7 +598,7 @@ Google was running millions of containers for years and needed a powerful system
 
 
 
-📅 Kubernetes Timeline
+### 📅 Kubernetes Timeline
 
 - 2003–2004 → Google starts building **Borg** for internal container management.
 - 2014 → Google open-sources the project as **Kubernetes**.
