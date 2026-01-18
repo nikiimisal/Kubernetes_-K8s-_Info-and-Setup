@@ -88,6 +88,11 @@ With Kubernetes:
 </p>
 
 
+<p align="center">
+  <img src="https://github.com/nikiimisal/Kubernetes_-K8s-_Info-and-Setup/blob/main/img/kubernetes_ecosystem.png?raw=true" width="500" alt="Initialize Repository Screenshot">
+</p>
+
+
 ---
 
 ### Key Components of Kubernetes
