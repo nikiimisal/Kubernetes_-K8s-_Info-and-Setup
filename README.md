@@ -649,6 +649,16 @@ Examples:
 
 ## 🌍 How Kubernetes Came to the Market
 
+
+
+
+
+<p align="center">
+  <img src="https://github.com/nikiimisal/Kubernetes_-K8s-_Info-and-Setup/blob/main/img/Kubernetes.webp?raw=true" width="500" alt="Initialize Repository Screenshot">
+</p> 
+
+
+
 Kubernetes came from Google’s internal system called Borg.
 Google was running millions of containers for years and needed a powerful system to manage them automatically.
 
