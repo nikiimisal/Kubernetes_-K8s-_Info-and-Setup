@@ -187,7 +187,7 @@ Components inside Worker Node:
 
 ### 5️⃣ Pod
 
-👉 Smallest deployable unit in Kubernetes
+👉 Smallest deployable unit in Kubernetes or it is rapper around your container
 
 - Pod runs one or more containers
 - Pods are created on Worker Nodes
