@@ -922,7 +922,7 @@ User → kubectl → Master Node
 
 
 <p align="center">
-  <img src="" width="500" alt="Initialize Repository Screenshot">
+  <img src="https://github.com/nikiimisal/Kubernetes_-K8s-_Info-and-Setup/blob/main/img/Screenshot%202026-01-22%20121300.png?raw=true" width="500" alt="Initialize Repository Screenshot">
 </p> 
 
 
@@ -933,7 +933,7 @@ User → kubectl → Master Node
 - Then, based on their dependencies, we created .sh files and gave permission to run them.
 
 <p align="center">
-  <img src="" width="500" alt="Initialize Repository Screenshot">
+  <img src="https://github.com/nikiimisal/Kubernetes_-K8s-_Info-and-Setup/blob/main/img/Screenshot%202026-01-22%20121353.png?raw=true" width="500" alt="Initialize Repository Screenshot">
 </p> 
 
 
@@ -950,13 +950,13 @@ User → kubectl → Master Node
 
 
 <p align="center">
-  <img src="" width="500" alt="Initialize Repository Screenshot">
+  <img src="https://github.com/nikiimisal/Kubernetes_-K8s-_Info-and-Setup/blob/main/img/Screenshot%202026-01-22%20114500.png?raw=true" width="500" alt="Initialize Repository Screenshot">
 </p>
 
 
 
 <p align="center">
-  <img src="" width="500" alt="Initialize Repository Screenshot">
+  <img src="https://github.com/nikiimisal/Kubernetes_-K8s-_Info-and-Setup/blob/main/img/Screenshot%202026-01-22%20121432.png?raw=true" width="500" alt="Initialize Repository Screenshot">
 </p>
 
 
@@ -965,7 +965,7 @@ User → kubectl → Master Node
 -  And here is last part to see history
 
 <p align="center">
-  <img src="" width="500" alt="Initialize Repository Screenshot">
+  <img src="https://github.com/nikiimisal/Kubernetes_-K8s-_Info-and-Setup/blob/main/img/Screenshot%202026-01-22%20114500.png?raw=true" width="500" alt="Initialize Repository Screenshot">
 </p>
 
 
