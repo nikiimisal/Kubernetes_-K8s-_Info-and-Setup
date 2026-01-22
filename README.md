@@ -813,8 +813,8 @@ The worker node uses the same ports as the Master:
 
 
 <p align="center">
-  <img src="" width="500" alt="Initialize Repository Screenshot">
-</p>
+  <img src="https://github.com/nikiimisal/Kubernetes_-K8s-_Info-and-Setup/blob/main/img/Screenshot%202026-01-22%20231949.png?raw=true" width="500" alt="Initialize Repository Screenshot">
+</p> 
 
 
 
