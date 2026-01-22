@@ -760,6 +760,71 @@ So Microsoft:
 - [Screpts](#example-8)
 - [Click to see linkdin post ..PPT is also there.]()
 
+
+---
+
+##  Kubernetes Cluster Setup on AWS (For kubeadm)
+
+
+To set up a Kubernetes cluster using kubeadm, we first need to launch two EC2 instances on AWS.
+
+###  Step 0: Launch EC2 Instances
+
+We launch two EC2 instances with the following roles:
+
+1️⃣ Kubernetes Master Instance
+
+- Instance Name: `k8s-master`
+- Instance Type: `t3.small`
+- OS: `Ubuntu` (20.04 / 22.04)
+- Purpose: Runs Kubernetes Control Plane components
+
+Security Group – Inbound Rules (Master)
+
+
+| Port  | Protocol | Source    | Purpose               |
+| ----- | -------- | --------- | --------------------- |
+| 22    | TCP      | 0.0.0.0/0 | SSH access            |
+| 80    | TCP      | 0.0.0.0/0 | Application access    |
+| 443   | TCP      | 0.0.0.0/0 | HTTPS access          |
+| 6443  | TCP      | 0.0.0.0/0 | Kubernetes API Server |
+| 10250 | TCP      | 0.0.0.0/0 | Kubelet communication |
+
+
+
+2️⃣ Kubernetes Worker Instance
+
+- Instance Name: `k8s-node`
+- Instance Type: `t3.micro`
+- OS: `Ubuntu`
+- Purpose: Runs application workloads (Pods)
+
+
+Security Group – Inbound Rules (Worker)<br>
+The worker node uses the same ports as the Master:
+
+- 22 (SSH)
+- 80 (HTTP)
+- 443 (HTTPS)
+- 6443 (API communication)
+- 10250 (Kubelet)
+
+
+
+
+<p align="center">
+  <img src="" width="500" alt="Initialize Repository Screenshot">
+</p>
+
+
+
+
+
+
+---
+---
+  
+
 ##  Kubernetes Cluster Setup Using kubeadm
 
 There are multiple ways (minimum 5) to set up a Kubernetes cluster, such as:
