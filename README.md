@@ -754,50 +754,164 @@ So Microsoft:
 <a id="example-6"></a>
 
 
+# Setup
+
+##  Kubernetes Cluster Setup Using kubeadm
+
+There are multiple ways (minimum 5) to set up a Kubernetes cluster, such as:
+
+- Minikube
+- Kind
+- KOPS
+- Managed Kubernetes (EKS, AKS, GKE)
+- kubeadm ✅
+
+> In this project, we are using kubeadm to set up the Kubernetes cluster.<br>
+  So, for this requirement, we need a master–slave architecture, and we will create (design) and implement it.
+
+ ---
+
+##  Master Node Setup
+
+
+To create a Kubernetes cluster using kubeadm, we first need to configure a Master node.<br>
+The following steps are performed on the Master server.
+
+###  Step 1: Connect to the Master Server  & Change the hostname
+
+
+```bash
+
+ssh -i server1.pem ubuntu@<public-ip>
+
+sudo hostnamectl set-hostname Master
+exit
+```
+This sets the server hostname to Master, which helps identify the role of the node in the cluster.
+
+---
+
+###  Step 2: Common Kubernetes Setup (Master + Worker)
+
+```bash
+nano k8s-common-containerd.sh
+sudo chmod +x k8s-common-containerd.sh
+sudo ./k8s-common-containerd.sh
+```
+
+This script:
+
+- Installs containerd
+- Installs kubeadm, kubelet, and kubectl
+- Disables swap
+- Performs common prerequisites required on all nodes
+
+---
+
+###   Step 3: Initialize Kubernetes Master
+
+
+```bash
+nano k8s-master-init.sh
+sudo chmod +x k8s-master-init.sh
+sudo ./k8s-master-init.sh
+```
+
+This script:
+
+- Initializes the Kubernetes control plane
+- Configures kubectl access
+- Deploys the pod network
+- Generates the join token for worker nodes
+
+---
+
+###   Step 4: Verify Master Node
+
+
+```
+kubectl get nodes -o wide
+```
+
+This command is used to verify that the Master node is ready and running.
+
+---
+---
+
+##  Worker (Node) Setup
+
+
+After setting up the Master, we configure the Worker node.
+
+
+###   Step 1: Set Hostname as Node
+
+```
+sudo hostnamectl set-hostname Node
+exit
+```
+
+This sets the hostname to Node, identifying it as a worker node.
+
+
+---
+
+###   Step 2: Common Kubernetes Setup
+
+```bash
+nano k8s-common-containerd.sh
+sudo chmod +x k8s-common-containerd.sh
+sudo ./k8s-common-containerd.sh
+```
+
+The same common setup script is executed on the worker node.
+
+---
+
+###  Step 3: Join Worker Node to Cluster
+
+```bash
+nano k8s-worker-join.sh
+sudo chmod +x k8s-worker-join.sh
+sudo ./k8s-worker-join.sh
+```
+
+This script uses the kubeadm join command to connect the worker node to the Master.
+
+---
+
+###  Step 4: Verify from Master
+
+```
+kubectl get nodes
+```
+
+This confirms that the worker node has successfully joined the cluster.
+
+---
+
+###   Final Cluster Flow
+
+```markdown
+User → kubectl → Master Node
+                 ↓
+            Worker Node
+```
+
+###  Key Points
+
+- kubeadm is used for production-like cluster setup
+- containerd is the container runtime
+- Master manages cluster state via etcd
+- Worker nodes run application pods
+- kubeadm join securely adds nodes to the cluster
+
+---
+---
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## Screenshots
 
 
 
