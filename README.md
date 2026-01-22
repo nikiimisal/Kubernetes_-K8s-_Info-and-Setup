@@ -756,8 +756,9 @@ So Microsoft:
 
 <h1>Setup</h1>
 
-- [Screenshots]()
-- [Screpts]()
+- [Screenshots](#example-7)
+- [Screpts](#example-8)
+- [Click to see linkdin post ..PPT is also there.]()
 
 ##  Kubernetes Cluster Setup Using kubeadm
 
@@ -912,7 +913,7 @@ User → kubectl → Master Node
 ---
 ---
 
-
+<a id="example-7"></a>
 
 ## Screenshots
 
@@ -973,6 +974,9 @@ User → kubectl → Master Node
 ---
 
 ---
+
+
+<a id="example-8"></a>
 
 
 #  Script
